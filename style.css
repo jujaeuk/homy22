@@ -1,0 +1,19 @@
+body,input,select,textarea{
+    font-family: 나눔고딕, Arial;
+	font-size: 10pt;
+	line-height: 180%;
+}
+a:link{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+	color: red;
+}
+.desktop{
+	width: 500px;
+}
+div{
+    margin: auto;
+    border: 1px dotted;
+}
