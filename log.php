@@ -38,6 +38,12 @@ if(($_POST['category_filter'])||($_GET['category_filter'])){
 	echo "category: ".$category_filter."<br>\n";
 	$que="select * from ".$homename."_log where category='".$category_filter."' order by start desc limit ".($rownum*$page);
 }
+elseif(($_POST['searchword'])||($_GET['searchword'])){
+	if($_POST['searchword']) $searchword=$_POST['searchword'];
+	elseif($_GET['searchword']) $searchword=$_GET['searchword'];
+	echo "search: ".$searchword."<br>\n";
+	$que="select * from ".$homename."_log where content like '%".$searchword."%' order by start desc limit ".($rownum*$page);
+}
 else{
 	echo "list - category: all<br>\n";
 	$que="select * from ".$homename."_log order by start desc, no desc limit ".($rownum*$page);
@@ -67,6 +73,16 @@ if($category_filter){
 		echo "<a href=$PHP_SELF?page=$next&category_filter=".urlencode($category_filter).">next</a>\n";
 	else echo "next\n";
 }
+elseif($searchword){
+  $que="select * from ".$homename."_log where content like '%".$searchword."%' order by start desc limit ".($rownum*$prev);
+  if(mysqli_num_rows(mysqli_query($connect,$que)))
+    echo "<a href=$PHP_SELF?page=$prev&searchword=".urlencode($searchword).">prev</a>\n";
+  else echo "prev\n";
+  $que="select * from ".$homename."_log where content like '%".$searchword."%' order by start desc limit ".($rownum*$next);
+  if(mysqli_num_rows(mysqli_query($connect,$que))>$rownum*($next-1))
+    echo "<a href=$PHP_SELF?page=$next&searchword=".urlencode($searchword).">next</a>\n";
+  else echo "next\n";
+}
 else{
 	$que="select * from ".$homename."_log order by start desc limit ".($rownum*$prev);
 	if(mysqli_num_rows(mysqli_query($connect,$que)))
@@ -78,12 +94,17 @@ else{
 	else echo "next\n";
 }
 echo "<form name=frm_filter method=post action=".$_SERVER['PHP_SELF'].">\n";
-echo "category filter: <select name=category_filter onChange=\"JavaScript:document.frm_filter.submit();\">\n";
+echo "<table>\n";
+echo "<tr><td>category filter</td><td><select name=category_filter onChange=\"JavaScript:document.frm_filter.submit();\">\n";
 echo "<option value=>---</option>\n";
 for($i=0;$i<sizeof($category);$i++){
 	echo "<option value='".$category[$i]."'>".$category[$i]."</option>\n";
 }
-echo "</select></form>\n";
+echo "</select></td></tr></form>\n";
+echo "<form method=post action=".$_SERVER['PHP_SELF'].">\n";
+echo "<tr><td>search</td><td><input type=text name=searchword> <input type=submit value=search></td></tr>\n";
+echo "</table>\n";
+echo "</form>\n";
 include "log_menu.php";
 
 include "foot.php";
