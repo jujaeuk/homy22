@@ -11,7 +11,9 @@ else $que="select * from ".$homename."_board order by time desc limit 1";
 @$check=mysqli_fetch_object(mysqli_query($connect,$que));
 
 echo "<h4>".$check->title."</h4>\n";
-echo "<p>by ".$check->writer." ".date("Y-m-d H:i",$check->time)." <a href=write.php?upper=$check->no>아랫글쓰기</a>";
+echo "<p>by ".$check->writer." ".date("Y-m-d H:i",$check->time)."\n";
+if($check->time_modify) echo "(".date("Y-m-d H:i",$check->time_modify).")\n";
+echo "<br><a href=write.php?upper=$check->no>아랫글쓰기</a>";
 if($_COOKIE['user']==$check->writer) echo " <a href=modify.php?no=$check->no>수정</a> <a href=addref.php?no=$check->no>참조</a> <a href=delete.php?no=$check->no&upper=$check->upper>삭제</a>";
 echo "</p>\n";
 echo "<p>".nl2br($check->content)."</p>\n";

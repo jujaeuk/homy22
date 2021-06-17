@@ -2,6 +2,7 @@
 include "lib.php";
 include "data/db_access.php";
 
+$now = time();
 if(isset($_POST['fdel'])){
 	foreach($_POST['fdel'] as $fdel){
 		$que="select * from ".$homename."_files where no=$fdel";
@@ -26,7 +27,7 @@ if($_FILES['file']['error']==0){
  
 if(!$_POST['title']) $_POST['title']="무제";
 $que="update ".$homename."_board set title='".htmlentities($_POST['title'],ENT_QUOTES).
-	"', content='".htmlentities($_POST['content'],ENT_QUOTES)."', upper=".$_POST['upper'].
+	"', time_modify=".$now.", content='".htmlentities($_POST['content'],ENT_QUOTES)."', upper=".$_POST['upper'].
 	", order_lower='".$_POST['order_lower']."'  where no=".$_POST['no'];
 
 mysqli_query($connect,$que);

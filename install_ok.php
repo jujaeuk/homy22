@@ -30,6 +30,7 @@ $que="create table ".$_POST['homename']."_board(
 	primary key(no),
 	title char(128),
 	time int,
+	time_modify int,
 	writer char(32),
 	content text,
 	upper int,
