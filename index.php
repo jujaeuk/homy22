@@ -76,7 +76,6 @@ if($check->no==1){
 		echo "<li><a href=board_backup.php>게시판 백업</a></li>\n";
 	}
 	echo "<li><a href=users.php>사용자 목록</a></li>\n";
-	echo "<li><a href=admin_table.php>테이블 관리</a></li>\n";
 	echo "<li><a href=uninstall.php>홈페이지 삭제</a></li>\n";
 	echo "</ul>\n";
 }
