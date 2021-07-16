@@ -35,6 +35,13 @@ include "login.php";
 $que="select * from ".$homename."_board order by time desc limit 1";
 $result=mysqli_query($connect,$que);
 if(@$check=mysqli_fetch_object($result)){
+	if(file_exists("data/intro.php")){
+		include "data/intro.php";
+		$que="select * from ".$homename."_board where no=$intro";
+		@$check_intro=mysqli_fetch_object(mysqli_query($connect,$que));
+		echo "<h4>".$check_intro->title."</h4>\n";
+		echo nl2br($check_intro->content);
+	}
 	echo "<h4>최근글: ".$check->title."\n";
 	echo "(".date("Y-m-d H:i",$check->time).")</h4>\n";
 	echo "<p>\n";
@@ -61,18 +68,17 @@ if($check->no==1){
 	$result=mysqli_query($connect,$que);
 	if(mysqli_num_rows($result)>0){
 		echo "<li><a href=write.php?upper=0>글쓰기</a></li>\n";
-		
 		$samesub=0;
-	$que="select * from ".$homename."_board where upper=0";
-	$result_sub=mysqli_query($connect,$que);
-	while(@$check_sub=mysqli_fetch_object($result_sub)){
-		$que="select * from ".$homename."_board where upper=0 and subno=".$check_sub->subno;
-		$result_samesub=mysqli_query($connect,$que);
-		$samesub1=0;
-		while(@$check_samesub=mysqli_fetch_object($result_samesub)) $samesub1++;
-		if($samesub1>1) $samesub++;
-	}
-	if($samesub>0) echo "<li><a href=subno_rearrange.php?no=0>목차 재정렬</a></li>\n";
+		$que="select * from ".$homename."_board where upper=0";
+		$result_sub=mysqli_query($connect,$que);
+		while(@$check_sub=mysqli_fetch_object($result_sub)){
+			$que="select * from ".$homename."_board where upper=0 and subno=".$check_sub->subno;
+			$result_samesub=mysqli_query($connect,$que);
+			$samesub1=0;
+			while(@$check_samesub=mysqli_fetch_object($result_samesub)) $samesub1++;
+			if($samesub1>1) $samesub++;
+		}
+		if($samesub>0) echo "<li><a href=subno_rearrange.php?no=0>목차 재정렬</a></li>\n";
 		echo "<li><a href=board_backup.php>게시판 백업</a></li>\n";
 	}
 	echo "<li><a href=users.php>사용자 목록</a></li>\n";
