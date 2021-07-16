@@ -31,17 +31,17 @@ else exit;
 include "head.php";
 include "login.php";
 
+if(file_exists("data/intro.php")){
+	include "data/intro.php";
+	$que="select * from ".$homename."_board where no=$intro";
+	@$check_intro=mysqli_fetch_object(mysqli_query($connect,$que));
+	echo "<h4>".$check_intro->title."</h4>\n";
+	echo nl2br($check_intro->content);
+}
 
 $que="select * from ".$homename."_board order by time desc limit 1";
 $result=mysqli_query($connect,$que);
 if(@$check=mysqli_fetch_object($result)){
-	if(file_exists("data/intro.php")){
-		include "data/intro.php";
-		$que="select * from ".$homename."_board where no=$intro";
-		@$check_intro=mysqli_fetch_object(mysqli_query($connect,$que));
-		echo "<h4>".$check_intro->title."</h4>\n";
-		echo nl2br($check_intro->content);
-	}
 	echo "<h4>최근글: ".$check->title."\n";
 	echo "(".date("Y-m-d H:i",$check->time).")</h4>\n";
 	echo "<p>\n";
