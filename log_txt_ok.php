@@ -2,14 +2,18 @@
 include "lib.php";
 include "data/db_access.php";
 $fp=fopen($_FILES['file']['tmp_name'],'r');
+
+$year=date("Y");
+$month=date("m");
+$day=date("d");
+
+$string=fgets($fp);
 while(!feof($fp)){
-	$string=fgets($fp);
 	if(preg_match("/^[0-9]{6,8}/",$string)){
 		if(preg_match("/^[0-9]{6}[^0-9]/",$string)) $string="20".$string;
 		$year=intval(substr($string, 0, 4));
 		$month=intval(substr($string, 4, 2));
 		$day=intval(substr($string, 6, 2));
-		$weekday=substr($string, 8, 3);
 	}
 	elseif(preg_match("/^[0-9]{4}/",$string)){
 		if(preg_match("/^[0-9]{4} /",$string)){
