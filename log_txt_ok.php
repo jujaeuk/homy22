@@ -1,18 +1,6 @@
 <?
-/* 인코딩이 이상하다 */
-
-/*
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-*/
 include "lib.php";
-include "barrier.php";
 include "data/db_access.php";
-
-include "head.php";
-include "login.php";
-
-echo "<h4>log</h4>\n";
 $fp=fopen($_FILES['file']['tmp_name'],'r');
 while(!feof($fp)){
 	$string=fgets($fp);
@@ -53,7 +41,6 @@ while(!feof($fp)){
 		mysqli_query($connect, $que);
 	}
 }
-echo "</table>\n";
 fclose($fp);
-include "foot.php";
 ?>
+<meta http-equiv="refresh" content="0;url=log.php">
