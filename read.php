@@ -1,4 +1,8 @@
 <?
+function title($title){
+	if($title) return $title;
+	else return "(no title)";
+}
 include "lib.php";
 include "barrier.php";
 include "data/db_access.php";
@@ -10,7 +14,7 @@ if(isset($_GET['no'])) $que="select * from ".$homename."_board where no=".$_GET[
 else $que="select * from ".$homename."_board order by time desc limit 1";
 @$check=mysqli_fetch_object(mysqli_query($connect,$que));
 
-echo "<h4>".$check->title."</h4>\n";
+echo "<h4>".title($check->title)."</h4>\n";
 echo "<p>by ".$check->writer." ".date("Y-m-d H:i",$check->time)."\n";
 if($check->time_modify) echo "(".date("Y-m-d H:i",$check->time_modify).")\n";
 echo "<br><a href=write.php?upper=$check->no>아랫글쓰기</a>";
@@ -54,7 +58,7 @@ while(@$check_ref=mysqli_fetch_object($result_ref)){
 	}
 	$que="select * from ".$homename."_board where no=".$check_ref->ref;
 	$check_ref1=mysqli_fetch_object(mysqli_query($connect,$que));
-	echo "<li><a href=read.php?no=$check_ref1->no>$check_ref1->title </a> <a href=delref.php?no=$check->no&refno=$check_ref->no>x</a></li>\n";
+	echo "<li><a href=read.php?no=$check_ref1->no>".title($check_ref1->title)."</a> <a href=delref.php?no=$check->no&refno=$check_ref->no>x</a></li>\n";
 	$i++;
 }
 if($i>0) echo "</ul>\n";
@@ -68,7 +72,7 @@ while(@$check_origin=mysqli_fetch_object($result_origin)){
 	}
 	$que="select * from ".$homename."_board where no=".$check_origin->origin;
 	$check_origin1=mysqli_fetch_object(mysqli_query($connect,$que));
-	echo "<li><a href=read.php?no=$check_origin1->no>$check_origin1->title </a> <a href=delref.php?no=$check->no&refno=$check_origin->no>x</a></li>\n";
+	echo "<li><a href=read.php?no=$check_origin1->no>".title($check_origin1->title)."</a> <a href=delref.php?no=$check->no&refno=$check_origin->no>x</a></li>\n";
 	$i++;
 }
 if($i>0) echo "</ul>\n";
@@ -81,7 +85,7 @@ while(@$check_sub=mysqli_fetch_object($result)){
 		echo "<h4>목차</h4>\n";
 		echo "<ul>\n";
 	}
-	echo "<li><a href=read.php?no=$check_sub->no>$check_sub->title </a>\n";
+	echo "<li><a href=read.php?no=$check_sub->no>".title($check_sub->title)."</a>\n";
 	if($check_sub->subno>1) echo "<a href=subup.php?no=$check->no&sub=$check_sub->no&subno=$check_sub->subno>^</a>\n";
 	echo "</li>\n";
 	$i++;
@@ -92,7 +96,7 @@ if($check->upper!=0){
 	echo "<h4>윗글</h4>\n";
 	$que="select * from ".$homename."_board where no=$check->upper";
 	@$check_upper=mysqli_fetch_object(mysqli_query($connect,$que));
-	echo "<ul><li><a href=read.php?no=$check->upper>$check_upper->title </a></li></ul>\n";
+	echo "<ul><li><a href=read.php?no=$check->upper>".title($check_upper->title)."</a></li></ul>\n";
 }
 echo "<h4>옆글</h4>\n";
 $que="select * from ".$homename."_board where no=$check->upper";
@@ -104,8 +108,8 @@ $result_peer=mysqli_query($connect,$que);
 $i=0;
 while(@$check_peer=mysqli_fetch_object($result_peer)){
 	if($i==0) echo "<ul>\n";
-	if($check_peer->no==$check->no) echo "<li>$check_peer->title </li>\n";
-	else echo "<li><a href=read.php?no=$check_peer->no>$check_peer->title </a></li>\n";
+	if($check_peer->no==$check->no) echo "<li>".title($check_peer->title)."</li>\n";
+	else echo "<li><a href=read.php?no=$check_peer->no>".title($check_peer->title)."</a></li>\n";
 	$i++;
 }
 if($i>0) echo "</ul>\n";
