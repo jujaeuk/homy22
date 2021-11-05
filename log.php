@@ -57,7 +57,7 @@ while(@$check=mysqli_fetch_object($result)){
 		if($check->end) echo date("H:i ",$check->end);
 		else echo "<a href=end.php?no=$check->no>end</a>\n";
 		if($check->loss>0) echo "(-:$check->loss)\n";
-		echo "($check->category) $check->content (<a href=log_edit.php?no=$check->no>edit</a>)\n";
+		echo "($check->category) $check->content <a href=log_edit.php?no=$check->no>e</a>\n";
 		echo "<br>\n";
 	}
 }
