@@ -1,4 +1,6 @@
 <?
+$NUM_DAYS = 5;
+
 function time_num($date){
 	$time_num = new \ stdClass();
 	$time_num->year=date("Y",$date);
@@ -53,7 +55,7 @@ include "login.php";
 
 echo "<h4>로그 일간 통계</h4>\n";
 echo "<table><tr>\n";
-for($i=0;$i<6;$i++){
+for($i=0;$i<$NUM_DAYS;$i++){
 	if((!is_mobile())||$i<4) $cate_list=stat_day($i,$homename,$connect,$cate_list);
 }
 echo "</tr></table>\n";
