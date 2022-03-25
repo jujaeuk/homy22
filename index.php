@@ -59,7 +59,7 @@ if(@$check=mysqli_fetch_object($result)){
 }
 echo "<h4>목차</h4>\n";
 subcontents($connect,$homename,0,0);
-$que="select * from ".$homename."_users where name='".$_COOKIE['user']."'";
+$que="select * from ".$homename."_users where name='".$_SESSION['user']."'";
 @$check=mysqli_fetch_object(mysqli_query($connect,$que));
 if($check->no==1){
 	echo "<h4>관리 메뉴</h4>\n";
