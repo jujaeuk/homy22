@@ -25,7 +25,7 @@ if(is_mobile()) echo "cols=40 rows=10";
 else echo "cols=60 rows=20";
 echo "></textarea></td></tr>\n";
 echo "<tr><td>파일</td><td><input type=file name=file></td></tr>\n";
-echo "<tr><td colspan=2 align=center><input type=submit value=저장></td></tr>\n";
+echo "<tr><td colspan=2 align=center><input type=submit class=submit value=저장></td></tr>\n";
 echo "</table>\n";
 echo "<input type=hidden name=upper value=".$_GET['upper'].">\n";
 echo "<input type=hidden name=writer value='".$_COOKIE['user']."'>\n";

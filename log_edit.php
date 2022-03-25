@@ -124,7 +124,7 @@ echo "<tr><td>content</td><td>\n";
 echo "<input type=text name=content value=\"$check->content\">";
 echo "</td></tr>\n";
 echo "<input type=hidden name=no value=".$_GET['no'].">\n";
-echo "<tr><td colspan=2 align=center><input type=submit value=save>\n";
+echo "<tr><td colspan=2 align=center><input type=submit class=submit value=save>\n";
 echo "<a href=log_delete.php?no=".$_GET['no'].">delete</a></td></tr>\n";
 echo "</table>\n";
 echo "</form>\n";

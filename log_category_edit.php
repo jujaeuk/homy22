@@ -37,7 +37,7 @@ for($i=0;$i<sizeof($category);$i++){
 }
 echo "<option value='직접입력'>직접입력</option>\n";
 echo "</select>\n";
-echo "<input type=submit value=edit>\n";
+echo "<input type=submit class=submit value=edit>\n";
 echo "</form>\n";
 
 include "log_menu.php";

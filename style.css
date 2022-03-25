@@ -1,7 +1,11 @@
 body,input,select,textarea{
+	background-color: #faf0d4;
     font-family: 나눔고딕, Arial;
 	font-size: 10pt;
 	line-height: 180%;
+}
+input{
+	border: solid 1px;
 }
 a:link{
 	text-decoration: none;
@@ -16,4 +20,7 @@ a:hover{
 div{
     margin: auto;
     border: 1px dotted;
+}
+.submit{
+	color: black;
 }

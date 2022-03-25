@@ -1,4 +1,5 @@
 <!doctype html>
+<? session_start();?>
 <html>
 <head>
 <title>homy 22 dev</title>

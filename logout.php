@@ -1,4 +1,5 @@
 <?
-setcookie("user", $_COOKIE['user'],time()-3600,".");
+session_start();
+session_destroy();
 echo "<meta http-equiv=\"refresh\" content=\"0;url=./\">\n";
 ?>

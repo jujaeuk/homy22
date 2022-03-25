@@ -7,7 +7,8 @@ else{
 	$check=mysqli_fetch_object($result);
 	if(crypt($_POST['password'],"onlyone")!=$check->password) $error_message="비밀번호가 틀렸습니다.";
 	else{
-		setcookie("user",$check->name,0,".");
+		session_start();
+		$_SESSION['user']=$check->name;
 		echo "<meta http-equiv=\"refresh\" content=\"0;url=index.php\">\n";
 	}
 }

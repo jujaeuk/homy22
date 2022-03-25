@@ -26,7 +26,7 @@ echo "</select>\n";
 echo "cont. <input type=checkbox name=cont value=yes>\n";
 echo "</td></tr>\n";
 echo "<tr><td>content</td><td><input type=text name=content>\n";
-echo "<input type=submit value=start>\n";
+echo "<input type=submit class=submit value=start>\n";
 echo "</td></tr></table></form>\n";
 
 $rownum=30;
@@ -102,7 +102,7 @@ for($i=0;$i<sizeof($category);$i++){
 }
 echo "</select></td></tr></form>\n";
 echo "<form method=post action=".$_SERVER['PHP_SELF'].">\n";
-echo "<tr><td>search</td><td><input type=text name=searchword> <input type=submit value=search></td></tr>\n";
+echo "<tr><td>search</td><td><input type=text name=searchword> <input type=submit class=submit value=search></td></tr>\n";
 echo "</table>\n";
 echo "</form>\n";
 include "log_menu.php";

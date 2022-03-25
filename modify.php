@@ -56,7 +56,7 @@ while(@$check_file=mysqli_fetch_object($result_file)){
 }
 echo "새로 추가할 파일:<br>\n";
 echo "<input type=file name=file></td></tr>\n";
-echo "<tr><td colspan=2 align=center><input type=submit value=저장></td></tr>\n";
+echo "<tr><td colspan=2 align=center><input type=submit class=submit value=저장></td></tr>\n";
 echo "</table>\n";
 echo "<input type=hidden name=writer value='".$_COOKIE['user']."'>\n";
 echo "<input type=hidden name=no value=$check->no>\n";
