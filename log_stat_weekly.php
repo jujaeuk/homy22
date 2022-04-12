@@ -37,9 +37,27 @@ function stat_week($start,$end,$homename,$connect,$cate_list){
 	echo "<table>\n";
 	echo "<tr><td colspan=2>".date("m/d", $week_start_day)." - ".date("m/d", $week_end_day-24*60*60)."</td></tr>\n";
 	if(isset($cate_list)){
+		$routine_sum=0;
+		$work_sum=0;
+		$study_sum=0;
+		$hobby_sum=0;
 		for($i=0;$i<sizeof($cate_list);$i++){
+			$routine=array("국내서","외국서","논문읽기");
+			$work=array("AI","폐업","금융허브","창업","기타업무");
+			$study=array("딥러닝","R","공수","일본어","파이썬");
+			if(in_array($cate_list[$i],$routine)) $routine_sum+=$time_list[$i];
+			if(in_array($cate_list[$i],$work)) $work_sum+=$time_list[$i];
+			if(in_array($cate_list[$i],$study)) $study_sum+=$time_list[$i];
+			if(in_array($cate_list[$i],$hobby)) $hobby_sum+=$time_list[$i];
 			if($cate_list[$i]!="기록") echo "<tr><td>".$cate_list[$i]."</td><td align=right>".$time_list[$i]."</td></tr>\n";
 		}
+		$sum=$routine_sum+$work_sum+$study_sum+$hobby_sum;
+		echo "<tr><td>&nbsp;</td><td></td></tr>\n";
+		echo "<tr><td>합계</td><td align=right>".$sum."</td></tr>\n";
+		echo "<tr><td>루틴</td><td align=right>"; printf("%5.2f",$routine_sum/$sum); echo "</td></tr>\n";
+		echo "<tr><td>회사일</td><td align=right>"; printf("%5.2f",$work_sum/$sum); echo "</td></tr>\n";
+		echo "<tr><td>공부</td><td align=right>"; printf("%5.2f",$study_sum/$sum); echo "</td></tr>\n";
+		echo "<tr><td>취미</td><td align=right>"; printf("%5.2f",$hobby_sum/$sum); echo "</td></tr>\n";
 	}
 	else echo "<tr><td></td><td></td></tr>\n";
 	echo "</table>\n";
